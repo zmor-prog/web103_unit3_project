@@ -24,6 +24,9 @@ svg polygon:hover {
 .venue1-button-overlay {
     opacity: 0;
     z-index: 10;
+    position: relative;
+    top: 15%;
+    left: -5%;
 }
 
 .venue2-button-overlay {
@@ -34,12 +37,23 @@ svg polygon:hover {
 .venue3-button-overlay {
     opacity: 0;
     z-index: 10;
+    position: relative;
+    left: 30%;
+}
+
+.venue4-button-overlay {
+    opacity: 0;
+    z-index: 10;
+    position: relative;
+    top: 20%;
+    left: -5%;
 }
 
 .venue1-button-overlay button,
 .venue2-button-overlay button,
-.venue3-button-overlay button {
-    width: 470px;
+.venue3-button-overlay button,
+.venue4-button-overlay button {
+    width: 200px;
     text-transform: uppercase;
     font-weight: 700;
 }

@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from 'react'
+import LocationsAPI from '../services/LocationsAPI'
 import unitygrid from '../assets/unitygrid.jpg'
 import '../css/Locations.css'
 
 const Locations = () => {
 
     const [locations, setLocations] = useState([])
-    const [venueNames, setVenueNames] = useState({venue1: '', venue2: '', venue3: ''})
+    const [venueNames, setVenueNames] = useState({venue1: '', venue2: '', venue3: '', venue4: ''})
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const locationsData = await LocationsAPI.getAllLocations()
+                setLocations(locationsData)
+
+                setVenueNames({venue1: locationsData[0].name, venue2: locationsData[1].name, venue3: locationsData[2].name, venue4: locationsData[3].name})
+                setListeners()
+            }
+            catch (error) {
+                throw error
+            }
+        }) ()
+    }, [])
 
     const setListeners = () => {
         const polygons = document.querySelectorAll('polygon')
@@ -37,6 +53,10 @@ const Locations = () => {
                 <button>{venueNames.venue3}</button>
             </div>
 
+            <div id='venue4button' className='venue4-button-overlay'>
+                <button>{venueNames.venue4}</button>
+            </div>
+
             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000.32 500" xmlSpace="preserve">
                 <image id="background" xlinkHref={unitygrid} transform="matrix(0.48 0 0 0.48 0 0)"></image>
                 
@@ -52,6 +72,9 @@ const Locations = () => {
                 
                 <a href='/pavilion'><polygon id="venue3" name='venue3' value={3} points="998.06,83.81 952.65,31.16 914.45,16.71 877.29,43.55 833.94,102.39 811.74,161.23 
                 796.77,241.23 802.97,303.16 833.94,353.23 871.61,385.23 954.71,385.23 1000.32,387.81 " /></a>
+
+                <a href='/americanairlines'><polygon id="venue4" name='venue4' value={4} points="625,291 615,305 608,318 625,338 637,354 622.5,358 673,363.5 751,363.5 793,363.5 
+                769,352 772,347 793,340 806,321 796.8,291 784,269 757,261 730,272 707,281 672,283 "/></a>
             </svg>
    
         </div>
